@@ -575,5 +575,24 @@ function analyze() {
 
   let sleepMins = parseTime(sleepVal);
   let wakeMins = parseTime(wakeVal);
+  // Handle next-day wake
+  if (wakeMins <= sleepMins) wakeMins += 24 * 60;
+
+  const totalMins = wakeMins - sleepMins;
+  const hours = totalMins / 60;
+  const hoursDisplay = hours % 1 === 0 ? hours.toFixed(0) : hours.toFixed(1);
+
+  // Sleep debt vs 8h ideal
+  const idealWeekly = 8 * selectedDays;
+  const actualWeekly = hours * selectedDays;
+  const debt = Math.max(0, idealWeekly - actualWeekly).toFixed(1);
+
+  // Classify
+  const sleepHour = parseTime(sleepVal) / 60;
+  const isNightOwl = sleepHour >= 2 && sleepHour <= 6;
+  const isEarlyBird = sleepHour >= 20 || sleepHour <= 22;
+
+  let roast, emoji, ratingText, ratingColor, barColor, barPct, scoreType;
+
 
 
