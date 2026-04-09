@@ -307,3 +307,95 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+/* STATS ROW */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  background: var(--surface2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+}
+
+.sc-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
+}
+
+.sc-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ROAST CARD */
+.roast-card {
+  background: var(--amber-dim);
+  border: 1.5px solid rgba(240,164,48,0.2);
+  border-radius: 22px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.roast-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.roast-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.result-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.rbtn {
+  flex: 1;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 15px;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+}
+.rbtn:hover { background: var(--surface); }
+
+.rbtn-amber {
+  background: var(--amber);
+  color: #0a0a0a;
+  border-color: var(--amber);
+}
+.rbtn-amber:hover { opacity: 0.9; }
+
+@media (max-width: 440px) {
+  .phone {
+    border-radius: 32px;
+    min-height: unset;
+  }
