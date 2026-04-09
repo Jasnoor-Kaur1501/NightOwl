@@ -637,6 +637,38 @@ function analyze() {
   document.getElementById("statType").textContent = scoreType;
 
   document.getElementById("roastText").textContent = roast;
+  setTimeout(() => {
+    const fill = document.getElementById("sleepBarFill");
+    fill.style.background = ratingColor;
+    fill.style.width = Math.min(100, barPct) + "%";
+  }, 300);
 
+  showScreen("screen-result");
+}
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function goBack() {
+  document.getElementById("sleepBarFill").style.width = "0%";
+  showScreen("screen-input");
+}
+
+function copyRoast() {
+  const hours = document.getElementById("resultHours").textContent;
+  const roast = document.getElementById("roastText").textContent;
+  const rating = document.getElementById("ratingBadge").textContent;
+  const text = `My NightOwl sleep report 🦉\n\n${hours} of sleep · Rating: ${rating}\n\n"${roast}"\n\nGet roasted → NightOwl`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector(".rbtn-amber");
+    btn.textContent = "copied ✓";
+    setTimeout(() => btn.textContent = "copy roast", 2000);
+  });
+}
+</script>
+</body>
+</html>
 
 
