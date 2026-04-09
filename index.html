@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NightOwl</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #0a0a0a;
+  --surface: #131313;
+  --surface2: #1c1c1c;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0ece6;
+  --muted: rgba(240,236,230,0.4);
+  --dim: rgba(240,236,230,0.15);
+  --amber: #f0a430;
+  --amber-dim: rgba(240,164,48,0.12);
+  --amber-glow: rgba(240,164,48,0.2);
+  --red: #e05a5a;
+  --green: #5acd8a;
+  --blue: #5aaae0;
+  --font: 'Nunito', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* PHONE FRAME */
+.phone {
+  width: 100%;
+  max-width: 390px;
+  min-height: 720px;
+  background: var(--surface);
+  border-radius: 44px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* NOTCH */
+.notch {
+  width: 120px;
+  height: 28px;
+  background: var(--bg);
+  border-radius: 0 0 18px 18px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.notch-cam {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  border: 1.5px solid #2a2a2a;
+}
+
+/* SCREENS */
+.screen {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  padding: 0 28px 36px;
+  animation: slideUp 0.45s cubic-bezier(0.34,1.56,0.64,1);
+}
+.screen.active { display: flex; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SCREEN 1: INPUT ── */
+.app-icon {
+  font-size: 52px;
+  text-align: center;
+  margin: 24px 0 6px;
+  filter: drop-shadow(0 0 20px var(--amber-glow));
+
+</html>
