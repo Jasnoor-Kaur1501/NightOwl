@@ -582,5 +582,61 @@ function analyze() {
   const hours = totalMins / 60;
   const hoursDisplay = hours % 1 === 0 ? hours.toFixed(0) : hours.toFixed(1);
 
+  // Sleep debt vs 8h ideal
+  const idealWeekly = 8 * selectedDays;
+  const actualWeekly = hours * selectedDays;
+  const debt = Math.max(0, idealWeekly - actualWeekly).toFixed(1);
+
+  // Classify
+  const sleepHour = parseTime(sleepVal) / 60;
+  const isNightOwl = sleepHour >= 2 && sleepHour <= 6;
+  const isEarlyBird = sleepHour >= 20 || sleepHour <= 22;
+
+  let roast, emoji, ratingText, ratingColor, barColor, barPct, scoreType;
+
+  if (hours < 4) {
+    roast = getRoast(ROASTS.disaster);
+    emoji = "💀"; ratingText = "Disaster"; ratingColor = "#e05a5a";
+    barColor = "#e05a5a"; barPct = (hours / 10) * 100; scoreType = "Ghost";
+  } else if (hours < 6) {
+    roast = isNightOwl ? getRoast(ROASTS.nightOwl) : getRoast(ROASTS.bad);
+    emoji = "😵"; ratingText = "Rough"; ratingColor = "#e0855a";
+    barColor = "#e0855a"; barPct = (hours / 10) * 100; scoreType = "Zombie";
+  } else if (hours < 7) {
+    roast = getRoast(ROASTS.mediocre);
+    emoji = "😮‍💨"; ratingText = "Meh"; ratingColor = "#d4b84a";
+    barColor = "#d4b84a"; barPct = (hours / 10) * 100; scoreType = "Survival";
+  } else if (hours <= 9) {
+    roast = isEarlyBird ? getRoast(ROASTS.earlyBird) : getRoast(ROASTS.decent);
+    emoji = hours >= 8 ? "✨" : "🙂"; ratingText = hours >= 8 ? "Solid" : "Decent";
+    ratingColor = "#5acd8a"; barColor = "#5acd8a"; barPct = (hours / 10) * 100; scoreType = "Thriving";
+  } else if (hours <= 11) {
+    roast = getRoast(ROASTS.great);
+    emoji = "🌟"; ratingText = "Great"; ratingColor = "#5aaae0";
+    barColor = "#5aaae0"; barPct = 95; scoreType = "Elite";
+  } else {
+    roast = getRoast(ROASTS.oversleep);
+    emoji = "🛌"; ratingText = "Merged"; ratingColor = "#a05ae0";
+    barColor = "#a05ae0"; barPct = 100; scoreType = "One With Bed";
+  }
+
+  // Populate result screen
+  document.getElementById("resultEmoji").textContent = emoji;
+  document.getElementById("resultHours").textContent = hoursDisplay + "h";
+  document.getElementById("resultHours").style.color = ratingColor;
+
+  const badge = document.getElementById("ratingBadge");
+  badge.textContent = ratingText;
+  badge.style.background = ratingColor + "22";
+  badge.style.color = ratingColor;
+  badge.style.border = `1.5px solid ${ratingColor}44`;
+
+  document.getElementById("statBedtime").textContent = formatTime(sleepVal);
+  document.getElementById("statWake").textContent = formatTime(wakeVal);
+  document.getElementById("statDebt").textContent = debt === "0.0" ? "None 👑" : `-${debt}h`;
+  document.getElementById("statType").textContent = scoreType;
+
+  document.getElementById("roastText").textContent = roast;
+
 
 
