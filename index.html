@@ -399,3 +399,100 @@ body {
     border-radius: 32px;
     min-height: unset;
   }
+  body { padding: 0; align-items: flex-start; }
+  .phone { border-radius: 0; border: none; min-height: 100vh; }
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="notch"><div class="notch-cam"></div></div>
+
+  <!-- SCREEN 1: INPUT -->
+  <div class="screen active" id="screen-input">
+    <div class="app-icon">🦉</div>
+    <div class="app-title">NightOwl</div>
+    <div class="app-sub">be honest. when did you actually sleep?</div>
+
+    <div class="time-card">
+      <div class="tc-label"><span>😴</span> I went to sleep at</div>
+      <input class="tc-input" type="time" id="sleepTime" value="00:30" />
+    </div>
+
+    <div class="time-card">
+      <div class="tc-label"><span>☀️</span> I woke up at</div>
+      <input class="tc-input" type="time" id="wakeTime" value="08:00" />
+    </div>
+
+    <div class="days-row">
+      <div class="days-label">how many days this week?</div>
+      <div class="days-pills">
+        <button class="day-pill" onclick="setDays(1)">1</button>
+        <button class="day-pill" onclick="setDays(2)">2</button>
+        <button class="day-pill active" onclick="setDays(3)">3</button>
+        <button class="day-pill" onclick="setDays(4)">4</button>
+        <button class="day-pill" onclick="setDays(5)">5</button>
+        <button class="day-pill" onclick="setDays(6)">6</button>
+        <button class="day-pill" onclick="setDays(7)">7</button>
+      </div>
+    </div>
+
+    <button class="cta-btn" onclick="analyze()">roast my sleep →</button>
+  </div>
+
+  <!-- SCREEN 2: RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-top">
+      <span class="result-emoji" id="resultEmoji">😵</span>
+      <div class="result-hours" id="resultHours">—</div>
+      <div class="result-hours-label">hours of sleep</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-label-row">
+        <div class="rating-title">Sleep Score</div>
+        <div class="rating-badge" id="ratingBadge">—</div>
+      </div>
+      <div class="sleep-bar-track">
+        <div class="sleep-bar-fill" id="sleepBarFill"></div>
+      </div>
+      <div class="bar-markers">
+        <span>0h</span><span>4h</span><span>6h</span><span>8h</span><span>10h+</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="sc-val" id="statBedtime">—</div>
+        <div class="sc-label">Bedtime</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-val" id="statWake">—</div>
+        <div class="sc-label">Wake time</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-val" id="statDebt">—</div>
+        <div class="sc-label">Weekly debt</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-val" id="statType">—</div>
+        <div class="sc-label">Sleep type</div>
+      </div>
+    </div>
+
+    <div class="roast-card">
+      <div class="roast-label">🔥 the verdict</div>
+      <div class="roast-text" id="roastText">—</div>
+    </div>
+
+    <div class="result-btns">
+      <button class="rbtn" onclick="goBack()">← redo</button>
+      <button class="rbtn rbtn-amber" onclick="copyRoast()">copy roast</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedDays = 3;
+
