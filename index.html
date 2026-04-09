@@ -495,4 +495,85 @@ body {
 
 <script>
 let selectedDays = 3;
+const ROASTS = {
+  disaster: [
+    "You're not sleeping, you're briefly losing consciousness between doom scrolling sessions. Your body is filing a complaint.",
+    "Scientists study sleep deprivation. You're giving them free data. Voluntarily.",
+    "Your phone's battery gets more rest than you do. Think about that.",
+    "This isn't a sleep schedule. It's a cry for help formatted as a time picker."
+  ],
+  bad: [
+    "You know that foggy feeling at 3pm? That's your brain staging a walkout. It has demands.",
+    "Functioning on this? Sure. Thriving? Absolutely not. Your future self is exhausted on your behalf.",
+    "You're running on 80% and calling it fine. It's not fine. It's giving 'I'm okay' energy.",
+    "Somewhere a sleep scientist just felt a chill and doesn't know why."
+  ],
+  mediocre: [
+    "Not terrible. Not good. The beige of sleep schedules. You exist in a state of perpetual almost.",
+    "You're right on the edge of functioning like a person. Impressive in a concerning way.",
+    "This is giving 'I read that 7 hours is fine' energy. It's fine. Just fine.",
+    "Your body is tolerating this. It's not happy about it. But it's tolerating it."
+  ],
+  decent: [
+    "Okay honestly? Respect. This is rare. Your cortisol levels probably have a favourite song.",
+    "You sleep like someone who has their life together. Are you okay? That seems sustainable.",
+    "Solid. Not perfect, not dramatic — just solid. The sleep equivalent of a reliable friend.",
+    "This is actually good. Suspicious, but good."
+  ],
+  great: [
+    "Who are you and what are you doing up this early? This is either very healthy or slightly alarming.",
+    "Your sleep schedule belongs in a wellness magazine. A slightly boring wellness magazine. Kidding — this is great.",
+    "You're getting 8+ hours consistently. You probably also meal prep. No notes.",
+    "Elite sleep behaviour. Your REM cycles are probably having a better time than most people's weekends."
+  ],
+  oversleep: [
+    "10+ hours? Either you're recovering from something, or you've fully merged with your mattress.",
+    "The bed has chosen you. You are one with the duvet. Some call it rest. Others call it avoidance.",
+    "Sleeping this much is either healing or hiding. Only you know which one.",
+    "Your mattress misses you when you're awake. You know this."
+  ],
+  nightOwl: [
+    "4am? Bold. You've signed a treaty with the night that most people don't know exists.",
+    "Sleeping at 4am isn't a sleep schedule, it's a lifestyle statement. A tired one.",
+    "The night belongs to you. The morning is the enemy. You've made peace with this.",
+    "You and the moon have an understanding. The sun is just someone you tolerate."
+  ],
+  earlyBird: [
+    "In bed before 10pm? You're either training for something or you've transcended this mortal plane.",
+    "The birds haven't even figured out their morning plans and you've already had 8 hours.",
+    "Going to bed this early takes a special kind of peace with yourself. Respect.",
+    "10pm bedtime. You've unlocked the final form of having your life together."
+  ]
+};
+
+function getRoast(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function setDays(n) {
+  selectedDays = n;
+  document.querySelectorAll(".day-pill").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".day-pill")[n - 1].classList.add("active");
+}
+
+function parseTime(val) {
+  const [h, m] = val.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function formatTime(val) {
+  const [h, m] = val.split(":");
+  const hour = parseInt(h);
+  const ampm = hour >= 12 ? "pm" : "am";
+  const displayH = hour % 12 || 12;
+  return `${displayH}:${m}${ampm}`;
+}
+
+function analyze() {
+  const sleepVal = document.getElementById("sleepTime").value;
+  const wakeVal = document.getElementById("wakeTime").value;
+
+  let sleepMins = parseTime(sleepVal);
+  let wakeMins = parseTime(wakeVal);
+
 
